@@ -6,12 +6,20 @@ import (
 	"io/ioutil"
 )
 
-//RequestTrack struct is used to store last request ID , error Counts,
+//RequestTrack struct is used to store Last request IDs and Failure Counts
 type RequestTrack struct {
-	LastRequestID int   `json:"last_request_id"`
-	FailureCount  int   `json:"failure_count"`
-	ErrorCount    int   `json:"err_count"`
-	FailureIDs    []int `json:"failure_id"`
+	LastSuccessfulID int   `json:"last_successful_id"`
+	LastRequestID    int   `json:"last_request_id"`
+	FailureCount     int   `json:"failure_count"`
+	ErrorCount       int   `json:"error_count"`
+	FailureIDs       []int `json:"failure_id"`
+}
+
+// RequestTrackChannel to provide repsonses to feed data in channel
+type RequestTrackChannel struct {
+	RequestID    int
+	ErrorMessage string
+	Data         *Item
 }
 
 // WriteJSONFile function is used to write data from reqTrack object
